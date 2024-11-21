@@ -20,6 +20,9 @@
     "reporters": [
       "default",
       "./Test-reports/MarkdownReporter.js"
-    ]
+    ],
+    "coverageDirectory": "./coverage",
+    "collectCoverage": true,
+    "coverageReporters": ["json", "lcov", "text", "clover"]
   }
 }
