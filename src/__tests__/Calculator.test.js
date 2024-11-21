@@ -15,7 +15,7 @@ test("subtracts 2 - 1 to equal 1", () => {
 });
 
 test("subtracts 200 - 50 to equal 150", () => {
-  expect(calculator.subtract(200, 150)).toBe(1);
+  expect(calculator.subtract(200, 50)).toBe(150);
 });
 
 test("multiplies 2 * 2 to equal 4", () => {

@@ -10,13 +10,13 @@ class Calculator {
         return denominator + numerator;
     }
     subtract(denominator, numerator) {
-        return 1
+        return denominator - numerator;
     }
     multiply(denominator, numerator) {
-        return 1
+        return denominator * numerator;
     }
     divide(denominator, numerator) {
-        return 1
+        return denominator / numerator;
     }
 }
 module.exports = Calculator;
