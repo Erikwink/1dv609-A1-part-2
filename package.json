@@ -1,0 +1,16 @@
+{
+  "name": "1dv609-a1-part-2",
+  "version": "1.0.0",
+  "description": "TDD task",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Erik Wink",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nyc": "^17.1.0",
+    "sinon": "^19.0.2"
+  }
+}
