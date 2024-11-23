@@ -1,13 +1,16 @@
 const Calculator = require("../Calculator.js");
 const AdditionService = require("../AdditionService.js");
+const SubtractionService = require("../SubtractionService.js");
 
 
 
 jest.mock("../AdditionService.js");
+jest.mock("../SubtractionService.js");
 
 
 let calculator;
 let mockAdditionService;
+let mockSubtractionService;
 
 beforeEach(() => {
   // Mock the AdditionService class
@@ -17,6 +20,14 @@ beforeEach(() => {
 
   calculator = new Calculator(mockAdditionService);
 
+});
+
+test("SubtractionServices is called", () => {
+  calculator.subtract(1, 2);
+
+  expect(mockSubtractionService.subtract).toHaveBeenCalled();
+  expect(mockSubtractionService.subtract).toHaveBeenCalledTimes(1);
+  expect(mockSubtractionService.subtract).toHaveBeenCalledWith(1, 2);
 });
 
 test("AdditionServices is called", () => {
