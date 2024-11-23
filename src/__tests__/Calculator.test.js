@@ -10,14 +10,22 @@ let calculator;
 let mockAdditionService;
 
 beforeEach(() => {
+  // Mock the AdditionService class
   mockAdditionService = new AdditionService();
+  // Mock the add method
   mockAdditionService.add = jest.fn((a, b) => a + b);
 
   calculator = new Calculator(mockAdditionService);
 
 });
 
+test("AdditionServices is called", () => {
+  calculator.add(1, 2);
 
+  expect(mockAdditionService.add).toHaveBeenCalled();
+  expect(mockAdditionService.add).toHaveBeenCalledTimes(1);
+  expect(mockAdditionService.add).toHaveBeenCalledWith(1, 2);
+});
 
 
 test("adds 1 + 2 to equal 3", () => {
