@@ -12,3 +12,5 @@ class AdditionService {
         return denominator + numerator;
     }
 }
+
+module.exports = AdditionService;

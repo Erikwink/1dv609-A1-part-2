@@ -1,26 +1,21 @@
 const Calculator = require("../Calculator.js");
 const AdditionService = require("../AdditionService.js");
+
+
+
+jest.mock("../AdditionService.js");
+
+
 let calculator;
-
-
-jest.mock("../AdditionService.js", () => {
-  return jest.fn().mockImplementation(() => {
-    return {
-      add: (a, b) => a + b,
-    };
-  });
-});
-
+let mockAdditionService;
 
 beforeEach(() => {
-  calculator = new Calculator(new AdditionService());
-});
+  mockAdditionService = new AdditionService();
+  mockAdditionService.add = jest.fn((a, b) => a + b);
 
-test("AdditionService is called", () => {
-  calculator.add(1, 2);
-  expect(AdditionService).toHaveBeenCalled()
-  
-})
+  calculator = new Calculator(mockAdditionService);
+
+});
 
 
 

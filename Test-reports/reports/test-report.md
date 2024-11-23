@@ -1,20 +1,20 @@
 # Test Report
 **Total Tests**: 8
-**Passed Tests**: 8
-**Failed Tests**: 0
+**Passed Tests**: 0
+**Failed Tests**: 8
 **Skipped Tests**: 0
 
 ## Test Suite: src\__tests__\Calculator.test.js
 | Test | Status | Duration |
 |------|--------|----------|
-| AdditionService is called | ✔️ Passed | 3ms |
-| adds 1 + 2 to equal 3 | ✔️ Passed | N/Ams |
-| subtracts 2 - 1 to equal 1 | ✔️ Passed | N/Ams |
-| subtracts 200 - 50 to equal 150 | ✔️ Passed | 1ms |
-| multiplies 2 * 2 to equal 4 | ✔️ Passed | N/Ams |
-| divides 4 / 2 to equal 2 | ✔️ Passed | N/Ams |
-| divides 10 / 0 to equal Error | ✔️ Passed | 5ms |
-| divides 0 / 1 to equal Error | ✔️ Passed | N/Ams |
+| AdditionService is called | ❌ Failed | 1ms |
+| adds 1 + 2 to equal 3 | ❌ Failed | 1ms |
+| subtracts 2 - 1 to equal 1 | ❌ Failed | 1ms |
+| subtracts 200 - 50 to equal 150 | ❌ Failed | N/Ams |
+| multiplies 2 * 2 to equal 4 | ❌ Failed | N/Ams |
+| divides 4 / 2 to equal 2 | ❌ Failed | N/Ams |
+| divides 10 / 0 to equal Error | ❌ Failed | N/Ams |
+| divides 0 / 1 to equal Error | ❌ Failed | N/Ams |
 
 ## Coverage Summary
 | File | % Stmts | % Branch | % Funcs | % Lines |
