@@ -3,11 +3,12 @@
  */
 class Calculator {
 
-    constructor() {
+    constructor(additionService) {
+        this.additionService = additionService
     }
 
     add(denominator, numerator) {
-        return denominator + numerator;
+        return this.additionService.add(denominator, numerator);
     }
     subtract(denominator, numerator) {
         return denominator - numerator;

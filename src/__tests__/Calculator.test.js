@@ -18,8 +18,9 @@ beforeEach(() => {
 
 test("AdditionService is called", () => {
   calculator.add(1, 2);
-  expect(AdditionService).toHaveBeenCalled();
-});
+  expect(AdditionService).toHaveBeenCalled()
+  
+})
 
 
 
