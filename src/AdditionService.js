@@ -4,9 +4,6 @@
 class AdditionService {
     /**
      * Add two numbers
-     * @param {number} a
-     * @param {number} b
-     * @returns {number}
      */
     add(denominator, numerator) {
         if (isNaN(denominator) || isNaN(numerator)) {

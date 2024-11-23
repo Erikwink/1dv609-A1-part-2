@@ -4,6 +4,7 @@ const SubtractionService = require("../SubtractionService.js");
 
 
 
+
 jest.mock("../AdditionService.js");
 jest.mock("../SubtractionService.js");
 
@@ -15,13 +16,16 @@ let mockSubtractionService;
 beforeEach(() => {
   // Mock the AdditionService class
   mockAdditionService = new AdditionService();
+  mockSubtractionService = new SubtractionService();
   // Mock the add method
   mockAdditionService.add = jest.fn((a, b) => a + b);
+  mockSubtractionService.subtract = jest.fn((a, b) => a - b);
 
-  calculator = new Calculator(mockAdditionService);
+  calculator = new Calculator(mockAdditionService, mockSubtractionService);
 
 });
 
+describe("Calculator", () => {
 test("SubtractionServices is called", () => {
   calculator.subtract(1, 2);
 
@@ -29,6 +33,7 @@ test("SubtractionServices is called", () => {
   expect(mockSubtractionService.subtract).toHaveBeenCalledTimes(1);
   expect(mockSubtractionService.subtract).toHaveBeenCalledWith(1, 2);
 });
+
 
 test("AdditionServices is called", () => {
   calculator.add(1, 2);
@@ -38,6 +43,11 @@ test("AdditionServices is called", () => {
   expect(mockAdditionService.add).toHaveBeenCalledWith(1, 2);
 });
 
+test("AdditionServices returns correct value", () => {
+  mockAdditionService.add.mockReturnValue(3);
+
+  expect(calculator.add(1, 2)).toBe(3);
+});
 
 test("adds 1 + 2 to equal 3", () => {
   expect(calculator.add(1, 2)).toBe(3);
@@ -64,3 +74,4 @@ expect(() => calculator.divide(10, 0)).toThrow("Error")});
 
 test("divides 0 / 1 to equal Error", () => {
   expect(() => calculator.divide(10, 0)).toThrow("Error")});
+});
