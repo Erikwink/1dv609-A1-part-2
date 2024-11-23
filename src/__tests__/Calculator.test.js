@@ -33,7 +33,11 @@ test("SubtractionServices is called", () => {
   expect(mockSubtractionService.subtract).toHaveBeenCalledTimes(1);
   expect(mockSubtractionService.subtract).toHaveBeenCalledWith(1, 2);
 });
+test("SubtractionServices returns correct value", () => {
+  mockSubtractionService.subtract.mockReturnValue(3);
 
+  expect(calculator.subtract(6, 3)).toBe(3);
+});
 
 test("AdditionServices is called", () => {
   calculator.add(1, 2);
