@@ -16,6 +16,9 @@ class Calculator {
         return denominator * numerator;
     }
     divide(denominator, numerator) {
+        if (numerator === 0) {
+            throw new Error("Error: Cannot divide by zero");
+        }
         return denominator / numerator;
     }
 }
