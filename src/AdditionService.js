@@ -1,0 +1,5 @@
+/**
+ * AdditionService class
+ */
+class AdditionService {
+}

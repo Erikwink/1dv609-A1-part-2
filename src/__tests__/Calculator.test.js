@@ -1,9 +1,9 @@
 const Calculator = require("../Caclulator.js");
-
+const AdditionService = require("../AdditionService.js");
 let calculator;
 
 beforeEach(() => {
-  calculator = new Calculator();
+  calculator = new Calculator(AdditionService);
 });
 
 test("adds 1 + 2 to equal 3", () => {
@@ -25,3 +25,6 @@ test("multiplies 2 * 2 to equal 4", () => {
 test("divides 4 / 2 to equal 2", () => {
   expect(calculator.divide(4, 2)).toBe(2);
 });
+
+test("divides 10 / 0 to equal Error", () => {
+expect(() => calculator.divide(10, 0)).toThrow("Error")});
