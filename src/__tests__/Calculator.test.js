@@ -1,10 +1,28 @@
-const Calculator = require("../Caclulator.js");
+const Calculator = require("../Calculator.js");
 const AdditionService = require("../AdditionService.js");
 let calculator;
 
-beforeEach(() => {
-  calculator = new Calculator(AdditionService);
+
+jest.mock("../AdditionService.js", () => {
+  return jest.fn().mockImplementation(() => {
+    return {
+      add: (a, b) => a + b,
+    };
+  });
 });
+
+
+beforeEach(() => {
+  calculator = new Calculator(new AdditionService());
+});
+
+test("AdditionService is called", () => {
+  calculator.add(1, 2);
+  expect(AdditionService).toHaveBeenCalled();
+});
+
+
+
 
 test("adds 1 + 2 to equal 3", () => {
   expect(calculator.add(1, 2)).toBe(3);
@@ -28,3 +46,6 @@ test("divides 4 / 2 to equal 2", () => {
 
 test("divides 10 / 0 to equal Error", () => {
 expect(() => calculator.divide(10, 0)).toThrow("Error")});
+
+test("divides 0 / 1 to equal Error", () => {
+  expect(() => calculator.divide(10, 0)).toThrow("Error")});

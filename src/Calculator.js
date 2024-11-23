@@ -22,4 +22,6 @@ class Calculator {
         return denominator / numerator;
     }
 }
+
 module.exports = Calculator;
+module.exports.default = Calculator;
