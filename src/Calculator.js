@@ -3,10 +3,11 @@
  */
 class Calculator {
 
-    constructor(additionService, subtractionService, multiplyService) {
+    constructor(additionService, subtractionService, multiplyService, divisionService) {
         this.additionService = additionService
         this.subtractionService = subtractionService
         this.multiplyService = multiplyService
+        this.divisionService = divisionService
     }
 
     add(denominator, numerator) {
@@ -19,11 +20,8 @@ class Calculator {
         return this.multiplyService.multiply(denominator, numerator);
     }
     divide(denominator, numerator) {
-        if (numerator === 0) {
-            throw new Error("Error: Cannot divide by zero");
-        }
-        return denominator / numerator;
-    }
+       return this.divisionService.divide(denominator, numerator);
+}
 }
 
 module.exports = Calculator;
