@@ -1,4 +1,4 @@
-const AdditionService = require("../AdditionService.js");
+const AdditionService = require("../services/AdditionService.js");
 
 let additionService;
 

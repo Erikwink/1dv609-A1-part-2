@@ -1,12 +1,12 @@
 const Calculator = require("../Calculator.js");
-const AdditionService = require("../AdditionService.js");
-const SubtractionService = require("../SubtractionService.js");
+const AdditionService = require("../services/AdditionService.js");
+const SubtractionService = require("../services/SubtractionService.js");
 
 
 
 
-jest.mock("../AdditionService.js");
-jest.mock("../SubtractionService.js");
+jest.mock("../services/AdditionService.js");
+jest.mock("../services/SubtractionService.js");
 
 
 let calculator;

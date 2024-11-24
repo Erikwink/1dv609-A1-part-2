@@ -1,4 +1,4 @@
-const SubtractionService = require("../SubtractionService");
+const SubtractionService = require("../services/SubtractionService");
 
 let subtractionService;
 
