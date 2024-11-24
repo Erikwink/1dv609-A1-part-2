@@ -8,7 +8,7 @@ class DivisionService {
             throw new Error("Error: Not a number");
         }
         if (numerator === 0) {
-            throw new Error("Error");
+            throw new Error("Division by zero is not allowed");
         }
         return denominator / numerator;
     }

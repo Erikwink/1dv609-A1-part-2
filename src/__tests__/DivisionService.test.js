@@ -19,5 +19,5 @@ test("DivideService divide -10 / -2 to equal 5", () => {
     });
 
 test("DivideService divide 10 / 0 to equal Error", () => {
-    expect(() => divisionService.divide(10, 0)).toThrow("Error");
+    expect(() => divisionService.divide(10, 0)).toThrow("Division by zero is not allowed");
     });

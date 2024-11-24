@@ -101,12 +101,31 @@ describe("Calculator", () => {
   });
 
   
+  describe("Calculator Error Handling", () => {
+    test("DivisionService throws error for division by zero", () => {
+        mockDivisionService.divide.mockImplementation(() => {
+            throw new Error("Division by zero is not allowed");
+        });
 
-  test("divides 10 / 0 to equal Error", () => {
-    expect(() => calculator.divide(10, 0)).toThrow("Error");
-  });
+        expect(() => calculator.divide(10, 0)).toThrow("Division by zero is not allowed");
+    });
 
-  test("divides 0 / 1 to equal Error", () => {
-    expect(() => calculator.divide(10, 0)).toThrow("Error");
-  });
+    test("AdditionService throws error for invalid input", () => {
+        mockAdditionService.add.mockImplementation(() => {
+            throw new Error("Invalid input");
+        });
+
+        expect(() => calculator.add("a", 2)).toThrow("Invalid input");
+    });
+
+    test("SubtractionService throws error for invalid input", () => {
+        mockSubtractionService.subtract.mockImplementation(() => {
+            throw new Error("Invalid input");
+        });
+
+        expect(() => calculator.subtract(10, "b")).toThrow("Invalid input");
+    });
+});
+
+
 });
