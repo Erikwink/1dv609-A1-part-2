@@ -2,34 +2,54 @@ const Calculator = require("../Calculator.js");
 const AdditionService = require("../services/AdditionService.js");
 const SubtractionService = require("../services/SubtractionService.js");
 const multiplyService = require("../services/MultiplyService.js");
+const DivisionService = require("../services/DivisionService.js");
 
 jest.mock("../services/AdditionService.js");
 jest.mock("../services/SubtractionService.js");
 jest.mock("../services/MultiplyService.js");
+jest.mock("../services/DivisionService.js");
 
 let calculator;
 let mockAdditionService;
 let mockSubtractionService;
+let mockMultiplyService;
 
 beforeEach(() => {
   // Mock the AdditionService class
   mockAdditionService = new AdditionService();
   mockSubtractionService = new SubtractionService();
   mockMultiplyService = new multiplyService();
+  mockDivisionService = new DivisionService();
   // Mock the add method
   mockAdditionService.add = jest.fn((a, b) => a + b);
   mockSubtractionService.subtract = jest.fn((a, b) => a - b);
   mockMultiplyService.multiply = jest.fn((a, b) => a * b);
+  mockDivisionService.divide = jest.fn((a, b) => a / b);
 
   calculator = new Calculator(
     mockAdditionService,
     mockSubtractionService,
-    mockMultiplyService
+    mockMultiplyService,
+    mockDivisionService
   );
 });
 
 describe("Calculator", () => {
 
+  describe("Division Service", () => {
+    test("DivisionServices is called", () => {
+      calculator.divide(1, 2);
+
+      expect(mockDivisionService.divide).toHaveBeenCalled();
+      expect(mockDivisionService.divide).toHaveBeenCalledTimes(1);
+      expect(mockDivisionService.divide).toHaveBeenCalledWith(1, 2);
+    });
+    test("DivisionServices returns correct value", () => {
+      mockDivisionService.divide.mockReturnValue(0.5);
+
+      expect(calculator.divide(1, 2)).toBe(0.5);
+    });
+  });
 
   describe("Multiply Service", () => {
     test("MultiplyServices is called", () => {
