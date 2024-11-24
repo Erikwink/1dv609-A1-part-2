@@ -3,9 +3,10 @@
  */
 class Calculator {
 
-    constructor(additionService, subtractionService) {
+    constructor(additionService, subtractionService, multiplyService) {
         this.additionService = additionService
         this.subtractionService = subtractionService
+        this.multiplyService = multiplyService
     }
 
     add(denominator, numerator) {
@@ -15,7 +16,7 @@ class Calculator {
         return this.subtractionService.subtract(denominator, numerator);
     }
     multiply(denominator, numerator) {
-        return denominator * numerator;
+        return this.multiplyService.multiply(denominator, numerator);
     }
     divide(denominator, numerator) {
         if (numerator === 0) {

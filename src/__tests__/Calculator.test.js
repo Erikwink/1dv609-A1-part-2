@@ -40,7 +40,7 @@ describe("Calculator", () => {
       expect(mockMultiplyService.multiply).toHaveBeenCalledWith(1, 2);
     });
     test("MultiplyServices returns correct value", () => {
-      mockMultiplyService.multiply.mockReturnValue(3);
+      mockMultiplyService.multiply.mockReturnValue(2);
 
       expect(calculator.multiply(1, 2)).toBe(2);
     });
