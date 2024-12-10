@@ -1,4 +1,4 @@
-const AdditionService = require("../services/AdditionService.js");
+import AdditionService from "../services/AdditionService";
 
 let additionService;
 

@@ -13,4 +13,4 @@ class DivisionService {
         return denominator / numerator;
     }
 }
-module.exports = DivisionService;
+export default DivisionService;

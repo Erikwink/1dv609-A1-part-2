@@ -13,4 +13,4 @@ class AdditionService {
     }
 }
 
-module.exports = AdditionService;
+export default AdditionService;

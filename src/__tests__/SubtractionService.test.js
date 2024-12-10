@@ -1,4 +1,4 @@
-const SubtractionService = require("../services/SubtractionService");
+import SubtractionService from "../services/SubtractionService";
 
 let subtractionService;
 

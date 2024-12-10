@@ -1,3 +1,4 @@
+
 /**
  * Calculator class
  */
@@ -25,5 +26,4 @@ class Calculator {
 }
 }
 
-module.exports = Calculator;
-module.exports.default = Calculator;
+export default Calculator;

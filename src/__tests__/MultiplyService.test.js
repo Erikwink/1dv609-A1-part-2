@@ -1,4 +1,4 @@
-const MultiplyService = require('../services/MultiplyService');
+import MultiplyService from "../services/MultiplyService";
 
 let multiplyService;
 

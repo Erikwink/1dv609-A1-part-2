@@ -1,5 +1,8 @@
-const ConsoleView = require("../views/ConsoleView");
-const readline = require("node:readline");
+/* const ConsoleView = require("../views/ConsoleView");
+const readline = require("node:readline"); */
+
+import ConsoleView from "../views/ConsoleView";
+import readline from "node:readline";
 const consoleView = new ConsoleView();
 
 // shuold return string

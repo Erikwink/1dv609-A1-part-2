@@ -1,4 +1,4 @@
-const DivisionService = require('../services/DivisionService');
+import DivisionService from "../services/DivisionService";
 
 let divisionService;
 

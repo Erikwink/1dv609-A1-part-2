@@ -1,8 +1,8 @@
-const Calculator = require("../Calculator.js");
-const AdditionService = require("../services/AdditionService.js");
-const SubtractionService = require("../services/SubtractionService.js");
-const multiplyService = require("../services/MultiplyService.js");
-const DivisionService = require("../services/DivisionService.js");
+import Calculator from "../services/Calculator.js";
+import AdditionService from "../services/AdditionService.js";
+import SubtractionService from "../services/SubtractionService.js";
+import MultiplyService from "../services/MultiplyService.js";
+import DivisionService from "../services/DivisionService.js";
 
 
 jest.mock("../services/AdditionService.js");
@@ -20,7 +20,7 @@ beforeEach(() => {
   // Mock the AdditionService class
   mockAdditionService = new AdditionService();
   mockSubtractionService = new SubtractionService();
-  mockMultiplyService = new multiplyService();
+  mockMultiplyService = new MultiplyService();
   mockDivisionService = new DivisionService();
   // Mock the add method
   mockAdditionService.add = jest.fn((a, b) => a + b);

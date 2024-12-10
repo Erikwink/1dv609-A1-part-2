@@ -14,4 +14,4 @@ class SubtractionService {
     }
     }
     
-    module.exports = SubtractionService;
+export default SubtractionService;

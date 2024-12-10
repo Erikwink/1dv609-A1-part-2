@@ -12,4 +12,4 @@ class MultiplyService {
         return denominator * numerator;
     }
 }
-module.exports = MultiplyService;
+export default MultiplyService;

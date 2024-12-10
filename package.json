@@ -5,16 +5,22 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-  "start": "node index.js",
-  "test": "jest",
-  "coverage": "jest --coverage"
+    "start": "node index.js",
+    "test": "jest",
+    "coverage": "jest --coverage"
   },
   "author": "Erik Wink",
   "license": "ISC",
   "devDependencies": {
     "jest": "^29.7.0",
     "nyc": "^17.1.0",
-    "sinon": "^19.0.2"
+    "sinon": "^19.0.2",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-react": "^7.16.0",
+    "@babel/preset-typescript": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.16.4",
+    "@babel/runtime": "^7.16.3",
+    "babel-jest": "^29.7.0"
   },
   "jest": {
     "reporters": [
@@ -23,6 +29,9 @@
     ],
     "coverageDirectory": "./coverage",
     "collectCoverage": true,
-    "coverageReporters": ["json", "lcov", "text", "clover"]
+    "coverageReporters": ["json", "lcov", "text", "clover"],
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
   }
 }
