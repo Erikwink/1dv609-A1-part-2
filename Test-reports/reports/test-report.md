@@ -4,49 +4,49 @@
 **Failed Tests**: 0
 **Skipped Tests**: 0
 
+## Test Suite: src\__tests__\SubtractionService.test.js
+| Test | Status | Duration |
+|------|--------|----------|
+| SubtractionService subtract 1 - 2 to equal -1 | ✔️ Passed | 6ms |
+| SubtractionService to throw when NaN | ✔️ Passed | 5ms |
+| SubtractionService subtract -10 - -20 to equal 10 | ✔️ Passed | 1ms |
+
 ## Test Suite: src\__tests__\DivisionService.test.js
 | Test | Status | Duration |
 |------|--------|----------|
-| DivideService divide 6 / 2 to equal 3 | ✔️ Passed | 2ms |
-| DivideService to throw when NaN | ✔️ Passed | 5ms |
+| DivideService divide 6 / 2 to equal 3 | ✔️ Passed | 6ms |
+| DivideService to throw when NaN | ✔️ Passed | 6ms |
 | DivideService divide -10 / -2 to equal 5 | ✔️ Passed | 1ms |
-| DivideService divide 10 / 0 to equal Error | ✔️ Passed | 1ms |
-
-## Test Suite: src\__tests__\Calculator.test.js
-| Test | Status | Duration |
-|------|--------|----------|
-| DivisionServices is called | ✔️ Passed | 3ms |
-| DivisionServices returns correct value | ✔️ Passed | N/Ams |
-| MultiplyServices is called | ✔️ Passed | N/Ams |
-| MultiplyServices returns correct value | ✔️ Passed | N/Ams |
-| SubtractionServices is called | ✔️ Passed | 1ms |
-| SubtractionServices returns correct value | ✔️ Passed | 1ms |
-| AdditionServices is called | ✔️ Passed | N/Ams |
-| AdditionServices returns correct value | ✔️ Passed | N/Ams |
-| DivisionService throws error for division by zero | ✔️ Passed | 6ms |
-| AdditionService throws error for invalid input | ✔️ Passed | N/Ams |
-| SubtractionService throws error for invalid input | ✔️ Passed | N/Ams |
-
-## Test Suite: src\__tests__\MultiplyService.test.js
-| Test | Status | Duration |
-|------|--------|----------|
-| MultiplyService multiply 2 * 3 to equal 6 | ✔️ Passed | 2ms |
-| MultiplyService to throw when NaN | ✔️ Passed | 4ms |
-| MultiplyService multiply -10 * -20 to equal 200 | ✔️ Passed | 1ms |
+| DivideService divide 10 / 0 to equal Error | ✔️ Passed | N/Ams |
 
 ## Test Suite: src\__tests__\AdditionService.test.js
 | Test | Status | Duration |
 |------|--------|----------|
-| AdditionService add 1 + 2 to equal 3 | ✔️ Passed | 2ms |
-| AdditionService to throw when NaN | ✔️ Passed | 7ms |
-| AdditionService add -10 + -20 to equal -30 | ✔️ Passed | N/Ams |
+| AdditionService add 1 + 2 to equal 3 | ✔️ Passed | 8ms |
+| AdditionService to throw when NaN | ✔️ Passed | 6ms |
+| AdditionService add -10 + -20 to equal -30 | ✔️ Passed | 1ms |
 
-## Test Suite: src\__tests__\SubtractionService.test.js
+## Test Suite: src\__tests__\MultiplyService.test.js
 | Test | Status | Duration |
 |------|--------|----------|
-| SubtractionService subtract 1 - 2 to equal -1 | ✔️ Passed | 1ms |
-| SubtractionService to throw when NaN | ✔️ Passed | 7ms |
-| SubtractionService subtract -10 - -20 to equal 10 | ✔️ Passed | N/Ams |
+| MultiplyService multiply 2 * 3 to equal 6 | ✔️ Passed | 9ms |
+| MultiplyService to throw when NaN | ✔️ Passed | 10ms |
+| MultiplyService multiply -10 * -20 to equal 200 | ✔️ Passed | 1ms |
+
+## Test Suite: src\__tests__\Calculator.test.js
+| Test | Status | Duration |
+|------|--------|----------|
+| DivisionServices is called | ✔️ Passed | 9ms |
+| DivisionServices returns correct value | ✔️ Passed | 1ms |
+| MultiplyServices is called | ✔️ Passed | 1ms |
+| MultiplyServices returns correct value | ✔️ Passed | N/Ams |
+| SubtractionServices is called | ✔️ Passed | 1ms |
+| SubtractionServices returns correct value | ✔️ Passed | N/Ams |
+| AdditionServices is called | ✔️ Passed | N/Ams |
+| AdditionServices returns correct value | ✔️ Passed | N/Ams |
+| DivisionService throws error for division by zero | ✔️ Passed | 10ms |
+| AdditionService throws error for invalid input | ✔️ Passed | 1ms |
+| SubtractionService throws error for invalid input | ✔️ Passed | 1ms |
 
 ## Coverage Summary
 | File | % Stmts | % Branch | % Funcs | % Lines |

@@ -4,6 +4,7 @@ const SubtractionService = require("../services/SubtractionService.js");
 const multiplyService = require("../services/MultiplyService.js");
 const DivisionService = require("../services/DivisionService.js");
 
+
 jest.mock("../services/AdditionService.js");
 jest.mock("../services/SubtractionService.js");
 jest.mock("../services/MultiplyService.js");
@@ -13,6 +14,7 @@ let calculator;
 let mockAdditionService;
 let mockSubtractionService;
 let mockMultiplyService;
+let mockDivisionService;
 
 beforeEach(() => {
   // Mock the AdditionService class
@@ -26,11 +28,13 @@ beforeEach(() => {
   mockMultiplyService.multiply = jest.fn((a, b) => a * b);
   mockDivisionService.divide = jest.fn((a, b) => a / b);
 
+
   calculator = new Calculator(
     mockAdditionService,
     mockSubtractionService,
     mockMultiplyService,
-    mockDivisionService
+    mockDivisionService,
+
   );
 });
 
@@ -44,6 +48,7 @@ describe("Calculator", () => {
       expect(mockDivisionService.divide).toHaveBeenCalledTimes(1);
       expect(mockDivisionService.divide).toHaveBeenCalledWith(1, 2);
     });
+
     test("DivisionServices returns correct value", () => {
       mockDivisionService.divide.mockReturnValue(0.5);
 
@@ -126,6 +131,4 @@ describe("Calculator", () => {
         expect(() => calculator.subtract(10, "b")).toThrow("Invalid input");
     });
 });
-
-
 });
