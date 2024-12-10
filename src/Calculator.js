@@ -3,11 +3,12 @@
  */
 class Calculator {
 
-    constructor(additionService, subtractionService, multiplyService, divisionService) {
+    constructor(additionService, subtractionService, multiplyService, divisionService, consoleView) {
         this.additionService = additionService
         this.subtractionService = subtractionService
         this.multiplyService = multiplyService
         this.divisionService = divisionService
+        this.consoleView = consoleView
     }
 
     add(denominator, numerator) {
