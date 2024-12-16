@@ -35,7 +35,7 @@ describe("ConsoleView", () => {
  
   test("should display result from controller", (done) => {
     mockController.handleInput.mockReturnValue(3);
-    
+
     rlMock.question.mockImplementationOnce((_, callback) => {
       callback("1 + 2");
     });
@@ -49,4 +49,23 @@ describe("ConsoleView", () => {
       done();
     });
 });
+
+test("should display error if controller throws", (done) => {
+  mockController.handleInput.mockImplementation(() => {
+    throw new Error("Unsupported operation");
+  });
+
+  rlMock.question.mockImplementationOnce((_, callback) => {
+    callback("1 ^ 2");
+  });
+
+  consoleView.takeUserInput();
+
+  setImmediate(() => {
+    expect(console.error).toHaveBeenCalledWith("Error: Unsupported operation");
+    expect(rlMock.close).toHaveBeenCalled();
+    done();
+  });
+});
+
 });
