@@ -10,15 +10,20 @@ class ConsoleView {
   }
 
   takeUserInput() {
-    this.rl.question("Enter operation: ", (input) => {
+    this.rl.question("Enter operation  (or type exit to quit): ", (input) => {
       try {
+        if(input.toLocaleLowerCase() === 'exit') {
+          console.log('Goodbye!');
+          this.rl.close();
+          return;
+        }
         const result = this.controller.handleInput(input);
         this.displayResult(result);
       } catch (error) {
         this.displayError(error.message);
-      } finally {
-        this.rl.close();
       }
+
+      this.takeUserInput();
     });
   }
 

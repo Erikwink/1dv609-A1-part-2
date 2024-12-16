@@ -1,8 +1,6 @@
 import readline from "readline";
 import ConsoleView from "../views/ConsoleView.js";
-import Calculator from "../model/Calculator.js";
 
-// Mock readline so no real I/O happens
 jest.mock("readline");
 
 describe("ConsoleView", () => {
@@ -45,7 +43,6 @@ describe("ConsoleView", () => {
     setImmediate(() => {
       expect(mockController.handleInput).toHaveBeenCalledWith("1 + 2");
       expect(console.log).toHaveBeenCalledWith("Result: 3");
-      expect(rlMock.close).toHaveBeenCalled();
       done();
     });
 });
@@ -63,9 +60,21 @@ test("should display error if controller throws", (done) => {
 
   setImmediate(() => {
     expect(console.error).toHaveBeenCalledWith("Error: Unsupported operation");
-    expect(rlMock.close).toHaveBeenCalled();
     done();
   });
 });
 
+test("should close readline when user types exit", (done) => {
+  rlMock.question.mockImplementationOnce((_, callback) => {
+    callback("exit");
+  });
+
+  consoleView.takeUserInput();
+
+  setImmediate(() => {
+    expect(console.log).toHaveBeenCalledWith("Goodbye!");
+    expect(rlMock.close).toHaveBeenCalled();
+    done();
+  });
+});
 });
