@@ -1,5 +1,4 @@
-import Calculator from "../model/Calculator.js";
-import CalculatorController from "../controller/Controller.js";
+import CalculatorController from "../controller/CalculatorController.js";
 
 describe("CalculatorController", () => {
   let controller;
@@ -47,5 +46,13 @@ describe("CalculatorController", () => {
 
     expect(mockCalculator.divide).toHaveBeenCalledWith(4, 2);
     expect(result).toBe(2);
+  });
+
+  test("should throw an error for invalid input", () => {
+    expect(() => controller.handleInput("a + b")).toThrow("Invalid input");
+  });
+  
+  test("should throw an error for unsupported operation", () => {
+    expect(() => controller.handleInput("1 ^ 2")).toThrow("Unsupported operation");
   });
 });

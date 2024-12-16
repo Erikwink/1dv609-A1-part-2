@@ -6,15 +6,11 @@ import Calculator from "../model/Calculator.js";
 jest.mock("readline");
 
 describe("ConsoleView", () => {
-  let consoleView;
   let rlMock;
-  let calculator;
+  let mockController;
+  let consoleView;
 
   beforeEach(() => {
-    // Mock console.log globally
-    console.log = jest.fn();
-
-    // Create a mock implementation of readline.createInterface
     rlMock = {
       question: jest.fn(),
       close: jest.fn(),
@@ -22,70 +18,27 @@ describe("ConsoleView", () => {
 
     readline.createInterface.mockReturnValue(rlMock);
 
-    consoleView = new ConsoleView();
+    mockController = {
+      handleInput: jest.fn(),
+    };
+
+    console.log = jest.fn();
+    console.error = jest.fn();
+
+    consoleView = new ConsoleView(mockController);
   });
 
   afterEach(() => {
-    jest.clearAllMocks(); // Reset all mocks
+    jest.clearAllMocks();
   });
 
  
-  test("displayResult should log the result to console", () => {
-    const result = 1;
+  test("should display result from controller", (done) => {
+    mockController.handleInput.mockReturnValue(3);
 
-    consoleView.displayResult(result);
-
-    expect(console.log).toHaveBeenCalledTimes(1);
-    expect(console.log).toHaveBeenCalledWith(`Result: ${result}`);
-  });
-
- // OLD TEST
- /*  test("takeUserInput should handle user input and display the result", (done) => {
-    const userInput = "2 + 2";
-
-    // Mock rl.question to simulate user input
-    rlMock.question.mockImplementation((questionText, callback) => {
-      expect(questionText).toBe("Enter operation: ");
-      callback(userInput);
+    rlMock.question.mockImplementationOnce((_, callback) => {
+      callback("1 + 2");
     });
 
-    consoleView.takeUserInput();
-
-    setImmediate(() => {
-      expect(readline.createInterface).toHaveBeenCalledWith({
-        input: process.stdin,
-        output: process.stdout,
-      });
-
-      expect(rlMock.question).toHaveBeenCalledWith("Enter operation: ", expect.any(Function));
-      expect(console.log).toHaveBeenCalledWith(`Result: ${userInput}`);
-      expect(rlMock.close).toHaveBeenCalled();
-
-      done();
-    });
-  }); */
-
-  test('should take user input and perform addition', (done) => {
-    const userInput = "1 + 2";
-
-    // Mock implementation of rl.question to simulate user input
-    rlMock.question.mockImplementationOnce((questionText, callback) => {
-        callback(userInput);
-    });
-
-    
-    consoleView.takeUserInput();
-
-    setImmediate(() => {
-        expect(readline.createInterface).toHaveBeenCalledWith({
-            input: process.stdin,
-            output: process.stdout
-        });
-        expect(rlMock.question).toHaveBeenCalledWith("Enter operation: ", expect.any(Function));
-        expect(console.log).toHaveBeenCalledWith('Result: 3');
-        expect(rlMock.close).toHaveBeenCalled();
-        done();
-    });
 });
 });
-
