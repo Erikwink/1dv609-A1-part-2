@@ -35,10 +35,18 @@ describe("ConsoleView", () => {
  
   test("should display result from controller", (done) => {
     mockController.handleInput.mockReturnValue(3);
-
+    
     rlMock.question.mockImplementationOnce((_, callback) => {
       callback("1 + 2");
     });
 
+    consoleView.takeUserInput();
+
+    setImmediate(() => {
+      expect(mockController.handleInput).toHaveBeenCalledWith("1 + 2");
+      expect(console.log).toHaveBeenCalledWith("Result: 3");
+      expect(rlMock.close).toHaveBeenCalled();
+      done();
+    });
 });
 });
