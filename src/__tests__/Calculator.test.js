@@ -1,4 +1,4 @@
-import Calculator from "../services/Calculator.js";
+import Calculator from "../Calculator.js";
 import AdditionService from "../services/AdditionService.js";
 import SubtractionService from "../services/SubtractionService.js";
 import MultiplyService from "../services/MultiplyService.js";

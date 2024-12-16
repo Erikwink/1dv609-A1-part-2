@@ -1,54 +1,67 @@
-/* const ConsoleView = require("../views/ConsoleView");
-const readline = require("node:readline"); */
+import readline from "readline";
+import ConsoleView from "../views/ConsoleView.js";
 
-import ConsoleView from "../views/ConsoleView";
-import readline from "node:readline";
-const consoleView = new ConsoleView();
-
-// shuold return string
-// should return number within the string
-// should handle errors
-// should handle input of numbers
-
-jest.mock("node:readline");
+// Mock readline so no real I/O happens
+jest.mock("readline");
 
 describe("ConsoleView", () => {
-  let rl;
+  let consoleView;
+  let rlMock;
 
   beforeEach(() => {
-    // Mocking console.log to prevent it from writing to the console
+    // Mock console.log globally
     console.log = jest.fn();
-    // Mocking readline.createInterface to prevent it from creating an actual interface
-    rl = {
+
+    // Create a mock implementation of readline.createInterface
+    rlMock = {
       question: jest.fn(),
       close: jest.fn(),
     };
-    readline.createInterface.mockReturnValue(rl);
+
+    readline.createInterface.mockReturnValue(rlMock);
+
+    
+    consoleView = new ConsoleView();
   });
 
-
-afterEach(() => {
-  console.log.mockRestore();
-});
-
-test("displayResult is called", () => {
-  consoleView.displayResult(1);
-  expect(console.log).toHaveBeenCalledTimes(1);
-  expect(console.log).toHaveBeenCalledWith("Result: 1");
-});
-
-test('should take user input', (done) => {
-  rl.question.mockImplementation((questionText, callback) => {
-    callback('1 + 2');
+  afterEach(() => {
+    jest.clearAllMocks(); // Reset all mocks
   });
 
-  consoleView.takeUserInput();
+ 
+  test("displayResult should log the result to console", () => {
+    const result = 1;
 
-  setImmediate(() => {
-    expect(rl.question).toHaveBeenCalledWith('Enter operation: ', expect.any(Function));
-    expect(console.log).toHaveBeenCalledWith('Result: 3');
-    expect(rl.close).toHaveBeenCalled();
-    done();
+    consoleView.displayResult(result);
+
+    expect(console.log).toHaveBeenCalledTimes(1);
+    expect(console.log).toHaveBeenCalledWith(`Result: ${result}`);
+  });
+
+ 
+  test("takeUserInput should handle user input and display the result", (done) => {
+    const userInput = "2 + 2";
+
+    // Mock rl.question to simulate user input
+    rlMock.question.mockImplementation((questionText, callback) => {
+      expect(questionText).toBe("Enter operation: ");
+      callback(userInput);
+    });
+
+    consoleView.takeUserInput();
+
+    setImmediate(() => {
+      expect(readline.createInterface).toHaveBeenCalledWith({
+        input: process.stdin,
+        output: process.stdout,
+      });
+
+      expect(rlMock.question).toHaveBeenCalledWith("Enter operation: ", expect.any(Function));
+      expect(console.log).toHaveBeenCalledWith(`Result: ${userInput}`);
+      expect(rlMock.close).toHaveBeenCalled();
+
+      done();
+    });
   });
 });
-});
+
