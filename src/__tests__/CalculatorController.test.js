@@ -53,6 +53,6 @@ describe("CalculatorController", () => {
   });
 
   test("should throw an error for unsupported operation", () => {
-    expect(() => SUT.handleInput("1 ^ 2")).toThrow("Unsupported operation");
+    expect(() => SUT.handleInput("1 ^ 2")).toThrow("Invalid input");
   });
 });

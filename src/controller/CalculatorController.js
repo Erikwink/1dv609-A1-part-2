@@ -22,7 +22,7 @@ class CalculatorController {
           case "/":
             return this.calculator.divide(num1, num2);
           default:
-            throw new Error("Unsupported operation");
+            throw new Error("Invalid input");
         }
       }
     }

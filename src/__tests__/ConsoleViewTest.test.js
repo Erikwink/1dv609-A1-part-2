@@ -39,6 +39,7 @@ describe("ConsoleView", () => {
     console.error = jest.fn();
 
     SUT = new ConsoleView(mockController);
+    jest.spyOn(SUT, 'displayError').mockImplementation(() => {});
   });
 
   afterEach(() => {
@@ -67,19 +68,28 @@ describe("ConsoleView", () => {
     });
 });
 
-test("should display error if controller throws", (done) => {
+test('should display error if controller throws', (done) => {
+  const userInput = "1 ? 1";
+  const errorMessage = "Unsupported operation";
+
   mockController.handleInput.mockImplementation(() => {
-    throw new Error("Unsupported operation");
+    throw new Error(errorMessage);
   });
 
-  rlMock.question.mockImplementationOnce((_, callback) => {
-    callback("1 ^ 2");
+  rlMock.question.mockImplementationOnce((questionText, callback) => {
+    callback(userInput);
   });
 
   SUT.takeUserInput();
 
   setImmediate(() => {
-    expect(console.error).toHaveBeenCalledWith("Error: Unsupported operation");
+    expect(readline.createInterface).toHaveBeenCalledWith({
+      input: process.stdin,
+      output: process.stdout
+    });
+    expect(rlMock.question).toHaveBeenCalledWith("Enter operation (or type exit to quit):", expect.any(Function));
+    expect(mockController.handleInput).toHaveBeenCalledWith(userInput);
+    expect(SUT.displayError).toHaveBeenCalledWith(errorMessage);
     done();
   });
 });
@@ -92,7 +102,7 @@ test("should close readline when user types exit", (done) => {
   SUT.takeUserInput();
 
   setImmediate(() => {
-    expect(console.log).toHaveBeenCalledWith("Goodbye!");
+    expect(SUT.currentInput).toBe("Goodbye!");
     expect(rlMock.close).toHaveBeenCalled();
     done();
   });
