@@ -22,19 +22,7 @@ describe("ConsoleView", () => {
 
     readline.createInterface.mockReturnValue(rlMock);
 
-    const additionService = { add: jest.fn((a, b) => a + b) };
-    const subtractionService = { subtract: jest.fn((a, b) => a - b) };
-    const multiplyService = { multiply: jest.fn((a, b) => a * b) };
-    const divisionService = { divide: jest.fn((a, b) => a / b) };
-
     consoleView = new ConsoleView();
-    calculator = new Calculator(
-      additionService, 
-      subtractionService, 
-      multiplyService, 
-      divisionService,
-      consoleView);
-    
   });
 
   afterEach(() => {
@@ -51,8 +39,8 @@ describe("ConsoleView", () => {
     expect(console.log).toHaveBeenCalledWith(`Result: ${result}`);
   });
 
- 
-  test("takeUserInput should handle user input and display the result", (done) => {
+ // OLD TEST
+ /*  test("takeUserInput should handle user input and display the result", (done) => {
     const userInput = "2 + 2";
 
     // Mock rl.question to simulate user input
@@ -75,28 +63,29 @@ describe("ConsoleView", () => {
 
       done();
     });
-  });
-
+  }); */
 
   test('should take user input and perform addition', (done) => {
-    const userInput = '1 + 2';
+    const userInput = "1 + 2";
+
+    // Mock implementation of rl.question to simulate user input
     rlMock.question.mockImplementationOnce((questionText, callback) => {
-      expect(questionText).toBe("Enter operation: ");
-      callback(userInput);
+        callback(userInput);
     });
 
-    consoleView.takeUserInput((input) => calculator.handleInput(input));
+    
+    consoleView.takeUserInput();
 
     setImmediate(() => {
-      expect(readline.createInterface).toHaveBeenCalledWith({
-        input: process.stdin,
-        output: process.stdout
-      });
-      expect(rlMock.question).toHaveBeenCalledWith('Enter operation: ', expect.any(Function));
-      expect(console.log).toHaveBeenCalledWith('Result: 3');
-      expect(rlMock.close).toHaveBeenCalled();
-      done();
+        expect(readline.createInterface).toHaveBeenCalledWith({
+            input: process.stdin,
+            output: process.stdout
+        });
+        expect(rlMock.question).toHaveBeenCalledWith("Enter operation: ", expect.any(Function));
+        expect(console.log).toHaveBeenCalledWith('Result: 3');
+        expect(rlMock.close).toHaveBeenCalled();
+        done();
     });
-  });
+});
 });
 

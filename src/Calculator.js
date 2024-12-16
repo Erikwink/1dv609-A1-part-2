@@ -9,8 +9,9 @@ class Calculator {
         this.subtractionService = subtractionService
         this.multiplyService = multiplyService
         this.divisionService = divisionService
-        this.consoleView = consoleView
+        
     }
+    
 
     add(denominator, numerator) {
         return this.additionService.add(denominator, numerator);
