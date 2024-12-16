@@ -6,8 +6,23 @@ jest.mock("readline");
 describe("ConsoleView", () => {
   let rlMock;
   let mockController;
-  let consoleView;
-
+  let SUT;
+  const renderDisplay = (input, result) => `
+  _____________________
+ |  _________________  |
+ | | ${input.padEnd(15)} | |
+ | | = ${result.padEnd(13)} | |
+ | |_________________| |
+ |  ___ ___ ___   ___  |
+ | | 7 | 8 | 9 | | + | |
+ | |___|___|___| |___| |
+ | | 4 | 5 | 6 | | - | |
+ | |___|___|___| |___| |
+ | | 1 | 2 | 3 | | x | |
+ | |___|___|___| |___| |
+ | | . | 0 | = | | / | |
+ | |___|___|___| |___| |
+ |_____________________|`;
   beforeEach(() => {
     rlMock = {
       question: jest.fn(),
@@ -23,7 +38,7 @@ describe("ConsoleView", () => {
     console.log = jest.fn();
     console.error = jest.fn();
 
-    consoleView = new ConsoleView(mockController);
+    SUT = new ConsoleView(mockController);
   });
 
   afterEach(() => {
@@ -38,11 +53,16 @@ describe("ConsoleView", () => {
       callback("1 + 2");
     });
 
-    consoleView.takeUserInput();
+    SUT.takeUserInput();
 
     setImmediate(() => {
       expect(mockController.handleInput).toHaveBeenCalledWith("1 + 2");
-      expect(console.log).toHaveBeenCalledWith("Result: 3");
+      
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining("1 + 2"));
+      expect(console.log).toHaveBeenCalledWith(
+        expect.stringContaining("= 3")
+      );
+
       done();
     });
 });
@@ -56,7 +76,7 @@ test("should display error if controller throws", (done) => {
     callback("1 ^ 2");
   });
 
-  consoleView.takeUserInput();
+  SUT.takeUserInput();
 
   setImmediate(() => {
     expect(console.error).toHaveBeenCalledWith("Error: Unsupported operation");
@@ -69,11 +89,46 @@ test("should close readline when user types exit", (done) => {
     callback("exit");
   });
 
-  consoleView.takeUserInput();
+  SUT.takeUserInput();
 
   setImmediate(() => {
     expect(console.log).toHaveBeenCalledWith("Goodbye!");
     expect(rlMock.close).toHaveBeenCalled();
+    done();
+  });
+});
+
+test("should display updated calculator state after multiple inputs", (done) => {
+  mockController.handleInput
+    .mockReturnValueOnce(3)
+    .mockReturnValueOnce(10);
+
+  rlMock.question
+    .mockImplementationOnce((_, callback) => callback("1 + 2"))
+    .mockImplementationOnce((_, callback) => callback("5 x 2"))
+    .mockImplementationOnce((_, callback) => callback("exit"));
+
+  SUT.takeUserInput();
+
+  setImmediate(() => {
+    // First input: "1 + 2"
+    expect(console.log).toHaveBeenCalledWith(expect.stringContaining("1 + 2"));
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("= 3")
+    );
+
+    // Second input: "5 x 2"
+    expect(console.log).toHaveBeenCalledWith(expect.stringContaining("5 x 2"));
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("= 10")
+    );
+
+    // Exit
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("Goodbye!")
+    );
+    expect(rlMock.close).toHaveBeenCalled();
+
     done();
   });
 });

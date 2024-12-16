@@ -10,7 +10,7 @@ jest.mock("../services/SubtractionService.js");
 jest.mock("../services/MultiplyService.js");
 jest.mock("../services/DivisionService.js");
 
-let calculator;
+let SUT;
 let mockAdditionService;
 let mockSubtractionService;
 let mockMultiplyService;
@@ -29,7 +29,7 @@ beforeEach(() => {
   mockDivisionService.divide = jest.fn((a, b) => a / b);
 
 
-  calculator = new Calculator(
+  SUT = new Calculator(
     mockAdditionService,
     mockSubtractionService,
     mockMultiplyService,
@@ -42,7 +42,7 @@ describe("Calculator", () => {
 
   describe("Division Service", () => {
     test("DivisionServices is called", () => {
-      calculator.divide(1, 2);
+      SUT.divide(1, 2);
 
       expect(mockDivisionService.divide).toHaveBeenCalled();
       expect(mockDivisionService.divide).toHaveBeenCalledTimes(1);
@@ -52,13 +52,13 @@ describe("Calculator", () => {
     test("DivisionServices returns correct value", () => {
       mockDivisionService.divide.mockReturnValue(0.5);
 
-      expect(calculator.divide(1, 2)).toBe(0.5);
+      expect(SUT.divide(1, 2)).toBe(0.5);
     });
   });
 
   describe("Multiply Service", () => {
     test("MultiplyServices is called", () => {
-      calculator.multiply(1, 2);
+      SUT.multiply(1, 2);
 
       expect(mockMultiplyService.multiply).toHaveBeenCalled();
       expect(mockMultiplyService.multiply).toHaveBeenCalledTimes(1);
@@ -67,14 +67,14 @@ describe("Calculator", () => {
     test("MultiplyServices returns correct value", () => {
       mockMultiplyService.multiply.mockReturnValue(2);
 
-      expect(calculator.multiply(1, 2)).toBe(2);
+      expect(SUT.multiply(1, 2)).toBe(2);
     });
   });
 
 
   describe("Subtraction Service", () => {
     test("SubtractionServices is called", () => {
-      calculator.subtract(1, 2);
+      SUT.subtract(1, 2);
 
       expect(mockSubtractionService.subtract).toHaveBeenCalled();
       expect(mockSubtractionService.subtract).toHaveBeenCalledTimes(1);
@@ -83,7 +83,7 @@ describe("Calculator", () => {
     test("SubtractionServices returns correct value", () => {
       mockSubtractionService.subtract.mockReturnValue(3);
 
-      expect(calculator.subtract(6, 3)).toBe(3);
+      expect(SUT.subtract(6, 3)).toBe(3);
     });
   });
 
@@ -91,7 +91,7 @@ describe("Calculator", () => {
   
   describe("Addition Service", () => {
     test("AdditionServices is called", () => {
-      calculator.add(1, 2);
+      SUT.add(1, 2);
 
       expect(mockAdditionService.add).toHaveBeenCalled();
       expect(mockAdditionService.add).toHaveBeenCalledTimes(1);
@@ -101,7 +101,7 @@ describe("Calculator", () => {
     test("AdditionServices returns correct value", () => {
       mockAdditionService.add.mockReturnValue(3);
 
-      expect(calculator.add(1, 2)).toBe(3);
+      expect(SUT.add(1, 2)).toBe(3);
     });
   });
 
@@ -112,7 +112,7 @@ describe("Calculator", () => {
             throw new Error("Division by zero is not allowed");
         });
 
-        expect(() => calculator.divide(10, 0)).toThrow("Division by zero is not allowed");
+        expect(() => SUT.divide(10, 0)).toThrow("Division by zero is not allowed");
     });
 
     test("AdditionService throws error for invalid input", () => {
@@ -120,7 +120,7 @@ describe("Calculator", () => {
             throw new Error("Invalid input");
         });
 
-        expect(() => calculator.add("a", 2)).toThrow("Invalid input");
+        expect(() => SUT.add("a", 2)).toThrow("Invalid input");
     });
 
     test("SubtractionService throws error for invalid input", () => {
@@ -128,7 +128,7 @@ describe("Calculator", () => {
             throw new Error("Invalid input");
         });
 
-        expect(() => calculator.subtract(10, "b")).toThrow("Invalid input");
+        expect(() => SUT.subtract(10, "b")).toThrow("Invalid input");
     });
 });
 });

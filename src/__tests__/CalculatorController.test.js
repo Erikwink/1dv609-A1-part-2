@@ -1,7 +1,7 @@
 import CalculatorController from "../controller/CalculatorController.js";
 
 describe("CalculatorController", () => {
-  let controller;
+  let SUT;
   let mockCalculator;
 
   beforeEach(() => {
@@ -12,13 +12,13 @@ describe("CalculatorController", () => {
       divide: jest.fn(),
     };
 
-    controller = new CalculatorController(mockCalculator);
+    SUT = new CalculatorController(mockCalculator);
   });
 
   test("should call add when operator is '+'", () => {
     mockCalculator.add.mockReturnValue(3);
 
-    const result = controller.handleInput("1 + 2");
+    const result = SUT.handleInput("1 + 2");
 
     expect(mockCalculator.add).toHaveBeenCalledWith(1, 2);
     expect(result).toBe(3);
@@ -26,7 +26,7 @@ describe("CalculatorController", () => {
   test("should call subtract when operator is '-'", () => {
     mockCalculator.subtract.mockReturnValue(1);
 
-    const result = controller.handleInput("3 - 2");
+    const result = SUT.handleInput("3 - 2");
 
     expect(mockCalculator.subtract).toHaveBeenCalledWith(3, 2);
     expect(result).toBe(1);
@@ -34,7 +34,7 @@ describe("CalculatorController", () => {
   test("should call multiply when operator is '*'", () => {
     mockCalculator.multiply.mockReturnValue(6);
 
-    const result = controller.handleInput("2 * 3");
+    const result = SUT.handleInput("2 * 3");
 
     expect(mockCalculator.multiply).toHaveBeenCalledWith(2, 3);
     expect(result).toBe(6);
@@ -42,17 +42,17 @@ describe("CalculatorController", () => {
   test("should call divide when operator is '/'", () => {
     mockCalculator.divide.mockReturnValue(2);
 
-    const result = controller.handleInput("4 / 2");
+    const result = SUT.handleInput("4 / 2");
 
     expect(mockCalculator.divide).toHaveBeenCalledWith(4, 2);
     expect(result).toBe(2);
   });
 
   test("should throw an error for invalid input", () => {
-    expect(() => controller.handleInput("a + b")).toThrow("Invalid input");
+    expect(() => SUT.handleInput("a + b")).toThrow("Invalid input");
   });
-  
+
   test("should throw an error for unsupported operation", () => {
-    expect(() => controller.handleInput("1 ^ 2")).toThrow("Unsupported operation");
+    expect(() => SUT.handleInput("1 ^ 2")).toThrow("Unsupported operation");
   });
 });

@@ -1,21 +1,21 @@
 import SubtractionService from "../services/SubtractionService";
 
-let subtractionService;
+let SUT;
 
 beforeEach(() => {
-  subtractionService = new SubtractionService();
+  SUT = new SubtractionService();
 });
 
 test("SubtractionService subtract 1 - 2 to equal -1", () => {
-  expect(subtractionService.subtract(1, 2)).toBe(-1);
+  expect(SUT.subtract(1, 2)).toBe(-1);
 });
 
 test("SubtractionService to throw when NaN", () => {
-  expect(() => subtractionService.subtract("a", 2)).toThrow(
+  expect(() => SUT.subtract("a", 2)).toThrow(
     "Error: Not a number"
   );
 });
 
 test("SubtractionService subtract -10 - -20 to equal 10", () => {
-  expect(subtractionService.subtract(-10, -20)).toBe(10);
+  expect(SUT.subtract(-10, -20)).toBe(10);
 });
