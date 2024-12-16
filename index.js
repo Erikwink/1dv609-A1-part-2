@@ -1,5 +1,5 @@
 
-import Calculator from './src/Calculator.js';
+import Calculator from './src/model/Calculator.js';
 import AdditionService from './src/services/AdditionService.js';
 import SubtractionService from './src/services/SubtractionService.js';
 import MultiplyService from './src/services/MultiplyService.js';

@@ -1,6 +1,6 @@
 import readline from "readline";
 import ConsoleView from "../views/ConsoleView.js";
-import Calculator from "../Calculator.js";
+import Calculator from "../model/Calculator.js";
 
 // Mock readline so no real I/O happens
 jest.mock("readline");

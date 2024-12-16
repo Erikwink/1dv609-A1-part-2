@@ -11,7 +11,7 @@ class Calculator {
         this.divisionService = divisionService
         
     }
-    
+    // parseInput(input) {
 
     add(denominator, numerator) {
         return this.additionService.add(denominator, numerator);
